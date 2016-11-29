@@ -5,47 +5,53 @@ using System;
 namespace Kusnadi.Utils.Tests
 {
 	[TestClass]
-	public class Enum
+	public class EnumHelper
 	{
 		[TestMethod]
 		public void GetValue_PassInvalidEnumName_ReturnNull()
 		{
-			var enumValue =  "test".GetValue<MessageChoice>();
+			var enumHelper = new EnumHelper<MessageChoice>();
+			var enumValue =  enumHelper.GetValue("test");						
 			Assert.IsNull(enumValue);
 		}
 
-		[TestMethod]
+		[TestMethod]		
 		[ExpectedException(typeof(Exception))]
 		public void GetValue_PassNoneEnumTypeForReturnType_ThrowException()
 		{
-			var enumValue = "test".GetValue<Int32>();			
+			var enumHelper = new EnumHelper<Int32>();
+			var enumValue = enumHelper.GetValue("test");			
 		}
 
 		[TestMethod]
 		public void GetValue_PassInvalidEnumNameAccordingComparisonMode_ReturnNull()
 		{
-			var enumValue = "sendsms".GetValue<MessageChoice>(StringComparison.Ordinal);
+			var enumHelper = new EnumHelper<MessageChoice>();
+			var enumValue = enumHelper.GetValue("sendsms", StringComparison.Ordinal);			
 			Assert.IsNull(enumValue);
 		}
 
 		[TestMethod]
 		public void GetValue_PassValidEnumName_ReturnAssociatedEnumValue()
 		{
-			var enumValue = "sendsms".GetValue<MessageChoice>();
+			var enumHelper = new EnumHelper<MessageChoice>();
+			var enumValue = enumHelper.GetValue("sendsms");			
 			Assert.AreEqual(MessageChoice.SendSms, enumValue);
 		}
 
 		[TestMethod]
 		public void GetValue_PassInvalidEnumValue_ReturnNull()
 		{
-			var enumValue = Utils.Enum.GetValue<MessageChoice>(100);
+			var enumHelper = new EnumHelper<MessageChoice>();
+			var enumValue = enumHelper.GetValue(100);
 			Assert.IsNull(enumValue);
 		}
 
 		[TestMethod]
 		public void GetValue_PassValidEnumIntrinsicValue_ReturnAssociatedEnumValue()
 		{
-			var enumValue = Utils.Enum.GetValue<MessageChoice>(3);
+			var enumHelper = new EnumHelper<MessageChoice>();
+			var enumValue = enumHelper.GetValue(3);
 			Assert.AreEqual(MessageChoice.SendEmail, enumValue);
 		}
 
@@ -53,20 +59,23 @@ namespace Kusnadi.Utils.Tests
 		[ExpectedException(typeof(Exception))]
 		public void GetValue_PassNoneEnumTypeForReturnTypeWithValidEnumIntrinsicValue_ThrowException()
 		{
-			var enumValue = Utils.Enum.GetValue<Int32>(3);
+			var enumHelper = new EnumHelper<Int32>();
+			var enumValue = enumHelper.GetValue(3);
 		}
 
-		[TestMethod]		
+		[TestMethod]
 		public void GetAttribute_PassEnumValueWithoutCorrectAttribute_ReturnNull()
 		{
-			var attribute = MessageChoice.SendEmail.GetAttribute<DataAttribute>();
+			var enumHelper = new EnumHelper<MessageChoice>();
+			var attribute = enumHelper.GetAttribute<DataAttribute>(MessageChoice.SendEmail);
 			Assert.IsNull(attribute);
 		}
 
 		[TestMethod]
 		public void GetAttribute_PassEnumValueWithCorrectAttribute_ReturnAssociatedAttribute()
 		{
-			var attribute = MessageChoice.GetEmail.GetAttribute<DataAttribute>();
+			var enumHelper = new EnumHelper<MessageChoice>();
+			var attribute = enumHelper.GetAttribute<DataAttribute>(MessageChoice.GetEmail);
 			Assert.IsNotNull(attribute);
 			Assert.AreEqual("Get Email", attribute.Description);
 		}
@@ -74,14 +83,16 @@ namespace Kusnadi.Utils.Tests
 		[TestMethod]
 		public void GetDescription_WhenEnumHaveNoDescription_ReturnNull()
 		{
-			string description = MessageChoice.GetEmail.GetDescription();
-			Assert.IsNull(description);			
+			var enumHelper = new EnumHelper<MessageChoice>();
+			string description = enumHelper.GetDescription(MessageChoice.GetEmail);
+			Assert.IsNull(description);
 		}
 
 		[TestMethod]
 		public void GetDescription_WhenHasDescription_ReturnDescription()
 		{
-			string description = MessageChoice.SendSms.GetDescription();
+			var enumHelper = new EnumHelper<MessageChoice>();
+			string description = enumHelper.GetDescription(MessageChoice.SendSms);
 			Assert.AreEqual("Send Sms", description);
 		}
 	}

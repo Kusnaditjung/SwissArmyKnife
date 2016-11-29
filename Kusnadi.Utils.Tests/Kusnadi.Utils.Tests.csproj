@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kusnadi.Utils.Tests</RootNamespace>
     <AssemblyName>Kusnadi.Utils.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,19 +39,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq, Version=3.1.416.3, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.3.1.416.3\lib\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enum.cs" />
+    <Compile Include="EnumHelper.cs" />
     <Compile Include="Fakes\DataAttribute.cs" />
     <Compile Include="Fakes\MessageChoice.cs" />
+    <Compile Include="Fakes\TypeLoader\AbstractA.cs" />
+    <Compile Include="Fakes\TypeLoader\AbstractB.cs" />
+    <Compile Include="Fakes\TypeLoader\ClassB.cs" />
+    <Compile Include="Fakes\TypeLoader\ConcreteAbstractA.cs" />
+    <Compile Include="Fakes\TypeLoader\ConcreteClassA.cs" />
+    <Compile Include="Fakes\TypeLoader\ConcreteConcreteClassA.cs" />
+    <Compile Include="Fakes\TypeLoader\ConcreteInterfaceA.cs" />
+    <Compile Include="Fakes\TypeLoader\ClassA.cs" />
+    <Compile Include="Fakes\TypeLoader\InterfaceA.cs" />
+    <Compile Include="Fakes\TypeLoader\InterfaceB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kusnadi.Utils\Kusnadi.Utils.csproj">
@@ -60,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
